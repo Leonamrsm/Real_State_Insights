@@ -196,7 +196,7 @@ def insights(df):
     
     c2.plotly_chart(fig, use_container_width=True)
 
-    c1,c2 = st.beta_columns(2)
+    c1, c2 = st.beta_columns(2)
     # ========================================================== H7 ==========================================================
 
     c1.subheader('H7: The average property price is 10% higher during the summer and spring')
