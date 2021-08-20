@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np 
 import streamlit as st
 import plotly.express as px
-import folium
 
 st.set_page_config(page_title="House Rockect Insights", page_icon="📊",
                    layout="wide")
@@ -75,8 +74,6 @@ def overview_data(df):
     exp_data = st.expander("Click here to expand and see the dataset general information", expanded=False)
     
     with exp_data:
-
-        
 
         st.write(df.head(50))
         st.subheader("Data Dimensions")
