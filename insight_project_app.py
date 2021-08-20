@@ -4,13 +4,11 @@ import streamlit as st
 import plotly.express as px
 import folium
 
-from PIL import Image
-
 st.set_page_config(page_title="House Rockect Insights", page_icon="📊",
                    layout="wide")
 
 
-c1, c2 = st.beta_columns((1,5))
+c1, c2 = st.columns((1,5))
 
 
 st.write('')
@@ -69,7 +67,7 @@ def set_feature(df):
 def overview_data(df):
 
     st.header("Data Overview")
-    exp_data = st.beta_expander("Click here to expand and see the dataset general information", expanded=False)
+    exp_data = st.expander("Click here to expand and see the dataset general information", expanded=False)
     
     with exp_data:
 
@@ -109,7 +107,7 @@ def insights(df):
     st.header('Business Hypotheses')
     st.write('Below are the business hypotheses that were raised, and whether these are true or not.')
 
-    c1,c2 = st.beta_columns(2)
+    c1,c2 = st.columns(2)
     # ========================================================== H1 ==========================================================
 
 
@@ -140,19 +138,19 @@ def insights(df):
 
     c2.plotly_chart(fig, use_container_width=True)
 
-    c1,c2 = st.beta_columns(2)
+    c1,c2 = st.columns(2)
     # ========================================================== H3 ==========================================================
 
 
-    c1.subheader('H3: Properties without a basement have an average area (sqrt_lot) 40% larger than properties with basements')
+    c1.subheader('H3: Properties in bad condition but good view are 20% cheaper than properties with average condition and average view')
 
-    total_area_no_basement = df.loc[df['sqft_basement']==0, 'sqft_lot'].mean()
-    total_area_with_basement = df.loc[df['sqft_basement']!=0, 'sqft_lot'].mean()
+    mean_price_bad_condition_good_view = df.loc[(df['view_str']=='good') & (df['condition_str']=='bad'), 'price'].mean()
+    mean_price_avg_condition_avg_view = df.loc[(df['view_str']=='average') & (df['condition_str']=='average'), 'price'].mean()
 
-    x=['No', 'Yes']
-    y=[total_area_no_basement, total_area_with_basement]
+    x=['Good Condition/Bad View', 'Avg Condition/Avg View']
+    y=[mean_price_bad_condition_good_view, mean_price_avg_condition_avg_view]
 
-    fig = px.bar(x=x, y=y, color=x, labels={"x": "Has Basement?","y": "Price"}, template= 'seaborn')
+    fig = px.bar(x=x, y=y, color=x, labels={"y": "Price"}, template= 'seaborn')
     fig.update_layout(showlegend = False)
 
     c1.plotly_chart(fig, use_container_width=True)
@@ -169,7 +167,7 @@ def insights(df):
 
     c2.plotly_chart(fig, use_container_width=True)
 
-    c1,c2 = st.beta_columns(2)
+    c1,c2 = st.columns(2)
     # ========================================================== H5 ==========================================================
 
     c1.subheader('H5: Properties with 3 bathrooms have a MoM (Month over Month) growth of 15%')
@@ -196,7 +194,7 @@ def insights(df):
     
     c2.plotly_chart(fig, use_container_width=True)
 
-    c1, c2 = st.beta_columns(2)
+    c1, c2 = st.columns(2)
     # ========================================================== H7 ==========================================================
 
     c1.subheader('H7: The average property price is 10% higher during the summer and spring')
@@ -229,7 +227,7 @@ def insights(df):
     
     c2.plotly_chart(fig, use_container_width=True)
 
-    c1,c2 = st.beta_columns(2)
+    c1,c2 = st.columns(2)
     # ========================================================== H9 ==========================================================
 
     c1.subheader('H9: The growth in the price of properties in good condition is 20% with the grade')
@@ -250,19 +248,40 @@ def insights(df):
 
     # ========================================================== H10 ==========================================================
 
-    c2.subheader('H10: Properties in bad condition but with a good view are 10% more expensive than properties in average condition but with a bad view')
+    c2.subheader('H10: Properties in good condition and good view are, in average, 20% more expensive than properties in condition and average view')
 
-    mean_price_bad_condition_good_view = df.loc[(df['view_str']=='good') & (df['condition_str']=='bad'), 'price'].mean()
-    mean_price_average_condition_bad_view = df.loc[(df['view_str']=='bad') & (df['condition_str']=='average'), 'price'].mean()
+    mean_price_good_condition_good_view = df.loc[(df['view_str']=='good') & (df['condition_str']=='good'), 'price'].mean()
+    mean_price_good_condition_avg_view = df.loc[(df['view_str']=='average') & (df['condition_str']=='good'), 'price'].mean()
 
-    x=['Bad Condition - Good View', 'Avg Condition - Bad View']
-    y=[mean_price_bad_condition_good_view, mean_price_average_condition_bad_view]
+    x=['Good Condition - Good View', 'Good Condition - Average View']
+    y=[mean_price_good_condition_good_view, mean_price_good_condition_avg_view]
 
     fig = px.bar(x=x, y=y, color=x, labels={"x": "View and Condition States", "y": "Mean Price"}, template= 'seaborn')
     fig.update_layout(showlegend = False)
     
     c2.plotly_chart(fig, use_container_width=True)
 
+    return None
+
+def insights_table ():
+    st.title("Summary of Hypotheses")
+    hipoteses = pd.DataFrame({
+    'Result': ['False', 'False', 'False', 'False', 'False', 'True', 'False', 'True', 'False', 'True'],
+    'Decision Making':['Buy houses with waterfront that are cheap', 
+                        'Investing in properties regardless of the construction date', 
+                        'Acquire properties in poor condition but with good view if the cost of the renovation is not more than 80% of the property price', 
+                        'Investing in properties regardless of the year built', 
+                        'The average price MoM of properties with 3 bathrooms does not vary linearly', 
+                        'Invest in unrenovated properties and renovate them for sale', 
+                        'Acquire properties in the fall/winter and sell them in the spring/summer', 
+                        'Acquire real estate without a basement to build a basement for sale', 
+                        'Acquire properties with low levels of design and renovate them in order to increase the level of design for sale', 
+                        'Acquire properties with good conditions but an average view to renovate them in order to obtain a better view, thus profiting more from the sale']}, 
+    index=['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10'])
+
+    hipoteses = hipoteses.style.set_table_styles([dict(selector='th', props=[('text-align', 'left')])])
+    hipoteses.set_properties(**{'text-align': 'left'}).hide_index()
+    st.table(hipoteses)
     return None
 
 if __name__ == '__main__':
@@ -272,4 +291,5 @@ if __name__ == '__main__':
     df = set_feature(df)
     overview_data(df)
     insights(df)
+    insights_table()
 
