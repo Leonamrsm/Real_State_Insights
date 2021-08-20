@@ -29,6 +29,11 @@ welcome_format = '<p style="font-family:sans-serif;' \
                     '">Seattle Real Estate Investment Data Report from May 2014 to May 2015 </p>'
 st.markdown(welcome_format, unsafe_allow_html=True)
 
+st.sidebar.markdown('**House Rocket** is a company that works with the purchase and sale of real estate. '
+                          'The goal of this insight project is to find the best business opportunities.')
+
+st.sidebar.write("For more information about the project, go to: "
+                         "[GitHub](https://github.com/Leonamrsm/Real_State_Insights_Project)")
 
 @st.cache(allow_output_mutation=True)
 def get_data(path):
@@ -284,6 +289,113 @@ def insights_table ():
     st.table(hipoteses)
     return None
 
+def filter_houses_to_buy(df):
+
+    st.sidebar.title('Business Questions Options')
+
+
+    # ========================================================== Filter by year Built ==========================================================
+    st.sidebar.header('Select Year Build Range')
+
+    min_year_built = df['yr_built'].min()
+    max_year_built = df['yr_built'].max()
+
+    f_min_year_built = st.sidebar.slider('Min Year Built', int(min_year_built), int(max_year_built), int(min_year_built))
+    f_max_year_built = st.sidebar.slider('Max Year Built', int(min_year_built), int(max_year_built), int(max_year_built))
+
+    df = df[(df['yr_built'] >= f_min_year_built) & (df['yr_built'] <= f_max_year_built)]
+
+    # ========================================================== Filter by Price ================================================================
+    st.sidebar.header('Select Price Range')
+    
+    min_price = int(df['price'].min())
+    max_price = int(df['price'].max())
+
+    f_min_price = st.sidebar.slider('Min Price', min_price, max_price, min_price)
+    f_max_price = st.sidebar.slider('Max Price', min_price, max_price, max_price)
+
+    df = df[(df['price'] >= f_min_price) & (df['price'] <= f_max_price)]
+
+    # ========================================================== Filter by Profit ================================================================
+    st.sidebar.header('Select Profit Range')
+    
+    min_profit = int(df['profit'].min())
+    max_profit = int(df['profit'].max())
+
+    f_min_profit = st.sidebar.slider('Min Profit', min_profit, max_profit, min_profit)
+    f_max_profit = st.sidebar.slider('Max Profit', min_profit, max_profit, max_profit)
+
+    df = df[(df['profit'] >= f_min_profit) & (df['profit'] <= f_max_profit)]
+
+    # ========================================================== Filter by Seasons ================================================================
+    st.sidebar.header('Select the Seasons to Sell')
+    
+    values = list(df['season'].sort_values().unique())
+    f_bedrooms = st.sidebar.multiselect('Seasons', values)
+    df = df.loc[df['season'].isin(f_bedrooms) if f_bedrooms != [] else [True]*len(df)]
+
+    return df
+
+def business_questions(df):
+    st.title('Business Questions')
+    st.subheader('1. What properties should House Rocket buy and for what price?')
+    st.subheader('2. Once the house has been purchased, what is the best time to sell it and at what price?')
+
+    # ========================================================== Question 1 ==========================================================
+
+    dfq1 = df[['zipcode', 'price']].groupby('zipcode').median().reset_index()
+    dfq1 = dfq1.rename(columns={'price' : 'median_price'})
+    dfq1 = pd.merge(df, dfq1, on='zipcode', how = 'inner')
+
+    dfq1['buy'] = dfq1[['price', 'median_price', 'condition_str']].apply(
+        lambda x: 'Yes' if (x['price'] < x['median_price']) & (x['condition_str'] == 'good') else 'No', axis =1)
+
+    # Properties to buy
+    houses_to_buy = dfq1[dfq1['buy']=='Yes']
+
+    # ========================================================== Question 2 ==========================================================
+
+    dfq2 = houses_to_buy[['zipcode', 'season','price']].groupby(['season', 'zipcode']).median().reset_index()
+    dfq2 = dfq2.rename(columns = {'price' : 'median_price_by_region_season'} ) 
+
+    houses_to_buy = pd.merge(houses_to_buy, dfq2, on=['zipcode', 'season'], how = 'inner')
+
+    for index, row in houses_to_buy.iterrows():
+        if (row['median_price_by_region_season'] > row['price']):
+            houses_to_buy.loc[index, 'sale_price'] =  row['price'] * 1.1
+        else:
+            houses_to_buy.loc[index, 'sale_price'] = row['price'] * 1.3
+
+    houses_to_buy['profit'] = houses_to_buy['sale_price'] - houses_to_buy['price']
+
+    houses_to_buy = filter_houses_to_buy(houses_to_buy)
+
+    st.write('There are ', len(houses_to_buy), ' recommended properties for purchase')
+    st.write('The total estimated profit from the sale of properties is US$', int(houses_to_buy['profit'].sum()))
+
+
+    st.dataframe(houses_to_buy[['id', 'zipcode', 'price', 'sale_price', 'profit', 'season', 'bedrooms', 'bathrooms', 'sqft_living', 
+                                'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 
+                                'yr_built', 'yr_renovated', 'lat', 'long', 'sqft_living15', 'sqft_lot15']])
+
+    st.write('The map below shows the recommended properties for purchase, and in which season they should be purchased. The properties are divided by color, according to the expected profit.')
+
+    fig = px.scatter_mapbox(houses_to_buy,
+                    lat='lat',
+                    lon='long',
+                    size='price',
+                    color='profit',
+                    text = 'season',
+                    color_continuous_scale=px.colors.sequential.Rainbow,
+                    size_max=15,
+                    zoom=10)
+
+    fig.update_layout(mapbox_style='open-street-map')
+    fig.update_layout(height=600, margin={'r':0, 't':0, 'l':0, 'b':0})
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
 if __name__ == '__main__':
     # data extraction
     path = './kc_house_data.csv'
@@ -292,4 +404,5 @@ if __name__ == '__main__':
     overview_data(df)
     insights(df)
     insights_table()
+    business_questions(df)
 
