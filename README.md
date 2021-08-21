@@ -2,7 +2,7 @@
 
 ## Insights from a real state portfolio analysis.
 
-# 1. Business Problem.
+# 1. Business Problem
 
 House Rocket is a company that works with the purchase and sale of real estate. The objective of this project is to find the best business opportunities, that is, to maximize revenue. The best strategy is to buy houses in great condition at low prices and sell those properties at a higher price. The attributes of houses make them more or less attractive, influencing the attractiveness of the properties and, consequently, their price. The questions to be answered are:
 
