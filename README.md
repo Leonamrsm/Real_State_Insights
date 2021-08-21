@@ -1,6 +1,8 @@
 # House Rocket Project
 
-## Insights from a real state portfolio analysis.
+## Insights from a real state portfolio analysis
+
+To view the developed app that presents views for each of the hypotheses raised and answers the business questions, go to https://insights-house-rocket.herokuapp.com/
 
 # 1. Business Problem
 
@@ -66,7 +68,7 @@ Data Filtering
 Feature Engineering
 Exploratory Data Analysis
 Insights Conclusion
-Dashboard deploy on Heroku
+Dashboard deploy on [Heroku](https://insights-house-rocket.herokuapp.com/)
 
 
 **Step 01. Data Extraction:** Exctract the data from [Kaggle](https://www.kaggle.com/harlfoxem/housesalesprediction/discussion/207885).
@@ -100,6 +102,26 @@ Dashboard deploy on Heroku
 
 
 # 7. Business Results
+
+The following strategies for buying and selling properties were defined in order to answer the business questions:
+
+**Purchase conditions**:
+
+- Group data by region (postal code)
+- Within each region, find the median property price
+- Suggest that properties that are below the median price for each region and that are chosen in good condition be purchased
+
+Once the house has been purchased, what is the best time to sell it and at what price?
+
+- Group data by region (postal code) and by seasonality (Summer, Inter, etc).
+- Within each region and seasonality, calculate the median price
+
+**Sale conditions**:
+
+1. If the purchase price is higher than the region median + seasonality
+      - The sale price will be equal to the purchase price + 10%
+2. If the purchase price is less than the region median + seasonality.
+      - The sale price will be equal to the purchase price + 30%
 
 
 # 8. Conclusions
