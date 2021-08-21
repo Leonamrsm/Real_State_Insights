@@ -90,26 +90,13 @@ Dashboard deploy on Heroku
 | **H1** - Properties with waterfront, are 100% more expensive, on average?| False | Buy houses with waterfront that are cheap                    |
 | **H2** - Properties with build date less than 1955, are 50% cheaper, on average? | False      | Investing in properties regardless of the construction date      |
 | **H3** - Properties in bad condition but good view are 20% cheaper than properties with average condition and average view | True | Acquire properties in poor condition but with good view if the cost of the renovation is not more than 80% of the property price |
-| **H4** - Imóveis que nunca foram reformados são em média 20% mais baratos | Verdadeira | Investir em imóveis não reformados e reformá-los para venda  |
-| **H5** - Imóveis em más condições, mas com boa vista são 10% mais caros | Falsa      | Não investir em imóveis em más condições                     |
-| **H6** - Imóveis antigos e não renovados são 40% mais baratos | Verdadeira | Investir em imóveis antigos e não renovados e reformalos para venda |
-| **H7** - Imóveis com mais banheiros são em média 5% mais caros | Falsa      | Investir em imóveis de 3-5 banheiros                         |
-| **H8** - Imóveis renovados recentemente são 35% mais caros   | Falsa      | Investir em imóveis independente da reforma                  |
-| **H9** - O crescimento do preço dos imóveis mês após mês no ano de 2014 é de 10% | Falsa      | Investir em imóveis nos meses de menor custo                 |
-| **H10** - Imóveis com 3 banheiros tem um crescimento mês após mês de 15% | Falsa      | Investir em imóveis nos meses de menor custo                 |
-
-
- 	Result	Decision Making
-H1		
-H2	False	Investing in properties regardless of the construction date
-H3	False	Acquire properties in poor condition but with good view if the cost of the renovation is not more than 80% of the property price
-H4	False	Investing in properties regardless of the year built
-H5	False	The average price MoM of properties with 3 bathrooms does not vary linearly
-H6	True	Invest in unrenovated properties and renovate them for sale
-H7	False	Acquire properties in the fall/winter and sell them in the spring/summer
-H8	True	Acquire real estate without a basement to build a basement for sale
-H9	False	Acquire properties with low levels of design and renovate them in order to increase the level of design for sale
-H10	True	Acquire properties with good conditions but an average view to renovate them in order to obtain a better view, thus profiting more from the sale
+| **H4** - Property price growth year after year (YoY) is 10% | False | Investing in properties regardless of the year built  |
+| **H5** - Properties with 3 bathrooms have a MoM (Month over Month) growth of 15% | False      | The average price MoM of properties with 3 bathrooms does not vary linearly |
+| **H6** - Properties that have already been renovated (yr_renovated != 0) are on average 40% more expensive | True | Invest in unrenovated properties and renovate them for sale |
+| **H7** - The average property price is 10% higher during the summer and spring | False      | The average property price is 4.49% higher during the summer and spring. Acquire properties in the fall/winter and sell them in the spring/summer |
+| **H8** - The average property price with basement and good condition is 40% higher than poroperties without basement and good condition   | True      | Acquire properties in good condition without a basement to build a basement for sale                 |
+| **H9** - The growth in the price of properties in good condition is 20% with the grade | False | Acquire properties with low levels of design and renovate them in order to increase the level of design for sale            |
+| **H10** - Properties in good condition and good view are, in average, 40% more expensive than properties in condition and average view | True      | Acquire properties with good conditions but an average view to renovate them in order to obtain a better view, thus profiting more from the sale                 |
 
 
 # 7. Business Results
