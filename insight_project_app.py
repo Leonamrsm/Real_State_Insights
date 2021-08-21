@@ -375,7 +375,7 @@ def business_questions(df):
                                 'sqft_lot', 'floors', 'waterfront', 'view', 'condition', 'grade', 'sqft_above', 'sqft_basement', 
                                 'yr_built', 'yr_renovated', 'lat', 'long', 'sqft_living15', 'sqft_lot15']])
 
-    st.write('The map below shows the recommended properties for purchase, and in which season they should be purchased. The properties are divided by color, according to the expected profit.')
+    st.write('The map below shows the recommended properties for purchase, and in which season they should be selled. The properties are divided by color, according to the expected profit.')
 
     fig = px.scatter_mapbox(houses_to_buy,
                     lat='lat',
