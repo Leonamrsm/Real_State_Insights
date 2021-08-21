@@ -123,7 +123,7 @@ def insights(df):
                                                                                   template= 'seaborn')
     fig.update_layout(showlegend = False)
 
-    c1.plotly_chart(fig, use_container_width=True)
+    c1.plotly_chart(fig, use_container_width= True)
 
     # ========================================================== H2 ==========================================================
 
