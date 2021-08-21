@@ -69,41 +69,47 @@ Insights Conclusion
 Dashboard deploy on Heroku
 
 
-**Step 01. Data Extraction:** Exctract the data drom [Kaggle](https://www.kaggle.com/harlfoxem/housesalesprediction/discussion/207885).
+**Step 01. Data Extraction:** Exctract the data from [Kaggle](https://www.kaggle.com/harlfoxem/housesalesprediction/discussion/207885).
 
-**Step 01. Data Description:** My goal is to use statistics metrics to identify data outside the scope of business.
+**Step 02. Data Description:** My goal is to use statistics metrics to identify data outside the scope of business.
 
-**Step 02. Feature Engineering:** Derive new attributes based on the original variables to better describe the phenomenon that will be modeled.
+**Step 03. Feature Engineering:** Derive new attributes based on the original variables to better describe the phenomenon that will be modeled.
 
-**Step 03. Data Filtering:** Filter rows and select columns that do not contain information for modeling or that do not match the scope of the business.
+**Step 04. Data Filtering:** Filter rows and select columns that do not contain information for modeling or that do not match the scope of the business.
 
-**Step 04. Exploratory Data Analysis:** Explore the data to find insights and better understand the impact of variables on model learning.
+**Step 05. Exploratory Data Analysis:** Explore the data to find insights and better understand the impact of variables on model learning.
 
-**Step 05. Data Preparation:** Prepare the data so that the Machine Learning models can learn the specific behavior.
+**Step 06. Answer business problems:** Estimating the profit that can be made from buy and sell recommendations
 
-**Step 06. Feature Selection:** Selection of the most significant attributes for training the model.
+**Step 07. Deploy the model:** Publish the model in a cloud environment so that other people can see the results obtained.
 
-**Step 07. Machine Learning Modelling:** Machine Learning model training
+# 4. Top Insights
 
-**Step 08. Hyperparameter Fine Tunning:** Choose the best values for each of the parameters of the model selected from the previous step.
+| Hipótese                                                     | Resultado  | Tradução para negócio                                        |
+| ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ |
+| **H1** - Properties with waterfront, are 100% more expensive, on average?| False | Buy houses with waterfront that are cheap                    |
+| **H2** - Properties with build date less than 1955, are 50% cheaper, on average? | False      | Investing in properties regardless of the construction date      |
+| **H3** - Properties in bad condition but good view are 20% cheaper than properties with average condition and average view | True | Acquire properties in poor condition but with good view if the cost of the renovation is not more than 80% of the property price |
+| **H4** - Imóveis que nunca foram reformados são em média 20% mais baratos | Verdadeira | Investir em imóveis não reformados e reformá-los para venda  |
+| **H5** - Imóveis em más condições, mas com boa vista são 10% mais caros | Falsa      | Não investir em imóveis em más condições                     |
+| **H6** - Imóveis antigos e não renovados são 40% mais baratos | Verdadeira | Investir em imóveis antigos e não renovados e reformalos para venda |
+| **H7** - Imóveis com mais banheiros são em média 5% mais caros | Falsa      | Investir em imóveis de 3-5 banheiros                         |
+| **H8** - Imóveis renovados recentemente são 35% mais caros   | Falsa      | Investir em imóveis independente da reforma                  |
+| **H9** - O crescimento do preço dos imóveis mês após mês no ano de 2014 é de 10% | Falsa      | Investir em imóveis nos meses de menor custo                 |
+| **H10** - Imóveis com 3 banheiros tem um crescimento mês após mês de 15% | Falsa      | Investir em imóveis nos meses de menor custo                 |
 
-**Step 09. Convert Model Performance to Business Values:** Convert the performance of the Machine Learning model into a business result.
 
-**Step 10. Deploy Modelo to Production:** Publish the model in a cloud environment so that other people or services can use the results to improve the business decision.
-
-# 4. Top 3 Data Insights
-
-**Hypothesis 01:** The cases of heart diseases does not significantly depend on the height.
-
-**False.** As observed, up to ~165 cm there are significantly more cases of heart diseases. Then, above this height, there are fewer cases.
-
-**Hypothesis 02:** The are more cases of heart diseases for people who smokes than for people who does not.
-
-**False.** As observed, the great majority of cases are among people who doesn't smoke.
-
-**Hypothesis 03:** The are more cases of heart diseases for people who intakes alcohol than for people who does not.
-
-**False.** As observed, the great majority of cases are among people who doesn't intake alcohol.
+ 	Result	Decision Making
+H1		
+H2	False	Investing in properties regardless of the construction date
+H3	False	Acquire properties in poor condition but with good view if the cost of the renovation is not more than 80% of the property price
+H4	False	Investing in properties regardless of the year built
+H5	False	The average price MoM of properties with 3 bathrooms does not vary linearly
+H6	True	Invest in unrenovated properties and renovate them for sale
+H7	False	Acquire properties in the fall/winter and sell them in the spring/summer
+H8	True	Acquire real estate without a basement to build a basement for sale
+H9	False	Acquire properties with low levels of design and renovate them in order to increase the level of design for sale
+H10	True	Acquire properties with good conditions but an average view to renovate them in order to obtain a better view, thus profiting more from the sale
 
 
 # 7. Business Results
