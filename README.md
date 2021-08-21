@@ -123,17 +123,14 @@ Once the house has been purchased, what is the best time to sell it and at what 
 2. If the purchase price is less than the region median + seasonality.
       - The sale price will be equal to the purchase price + 30%
 
+Following these strategies, the total estimated profit from the sale of properties is US$ 322179949.50
+
 
 # 8. Conclusions
 
-# 9. Lessons Learned
-
-# 10. Next Steps to Improve
-
-**1.** **Develop an app** that intakes a portfolio of patients and assigns for each patient its respective probability of presenting a cardiovascular disease.
-
-**2.** **Run a Design Discovery** to uncover facts that could be missing in our analysis in order to enrich the data that we have and improve the model performance.
-
-**3.** Build a **model retraining pipeline**.
+The objective of this project was achieved; create a online dashboard to vizualize the principal insights, facilitating data visualization and business decisions, and answer the business questions, estimating the profit that can be made. 
 
 
+# 9. Next Steps to Improve
+
+**1.** **Develop a regression model** hat can indicate if a property is expensive or cheap and if a renovation is done the % of profit that can be made.
