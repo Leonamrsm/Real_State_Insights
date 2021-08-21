@@ -1,41 +1,75 @@
-# Cardio Catch Diseases
+# House Rocket Project
 
-## Predicting cardiovascular diseases
+## Insights from a real state portfolio analysis.
 
 # 1. Business Problem.
 
-Cardio Catch Diseases is a company specialized in detecting heart disease in the early stages. Its business model lies in offering an early diagnosis of cardiovascular disease for a certain price.
+House Rocket is a company that works with the purchase and sale of real estate. The objective of this project is to find the best business opportunities, that is, to maximize revenue. The best strategy is to buy houses in great condition at low prices and sell those properties at a higher price. The attributes of houses make them more or less attractive, influencing the attractiveness of the properties and, consequently, their price. The questions to be answered are:
 
-Currently, the diagnosis of cardiovascular disease is manually made by a team of specialists. The current accuracy of the diagnosis varies between 55% and 65%, due to the complexity of the diagnosis and also the fatigue of the team who take turns to minimize the risks. The cost of each diagnosis, including the devices and the payroll of the analysts, is around $1,000.00.
+1. Which houses should the CEO of House Rocket buy and at what purchase price?
 
-The price of the diagnosis, paid by the client, varies according to the precision achieved by the team of specialists.
+2. Once the house is owned by the company, what is the best time to sell it and what would be the sale price?
 
-| Exam Accuracy | Price          | Rules                                    | Example                         |
-|:--------------|:---------------|:-----------------------------------------|:--------------------------------|
-| Above 50%     | min \$500\.00  | \+\$500 for each additional 5% precision | Precision = 55% \-> \$1,000\.00 |
-| Up to 50%     | $0\.00         | N/A                                      | N/A                             |
 
-Thus, we see that **different values in the exam precision**, given by the team of specialists, make the company either have a profitable operation, revenue greater than the cost, or an operation with a loss, revenue less than the cost. This instability of the diagnosis makes the company to have an **unpredictable cashflow**.
+# 2. Data
 
-# 2. Business Assumptions.
+Data for this project can be found at: https://www.kaggle.com/harlfoxem/housesalesprediction/discussion/207885. Below is the definition for each of the 21 attributes:
+
+* The variables on original dataset goes as follows:<br>
+
+Variable | Definition
+------------ | -------------
+|id | Unique ID for each property available|
+|date | Date that the property was available|
+|price | Sale price of each property |
+|bedrooms | Number of bedrooms|
+|bathrooms | Number of bathrooms, where .5 accounts for a room with a toilet but no shower, and .75 or ¾ bath is a bathroom that contains one sink, one toilet and either a shower or a bath.|
+|sqft_living | Square footage of the apartments interior living space|
+|sqft_lot | Square footage of the land space|
+|floors | Number of floors|
+|waterfront | A dummy variable for whether the apartment was overlooking the waterfront or not|
+|view | An index from 0 to 4 of how good the view of the property was|
+|condition | An index from 1 to 5 on the condition of the apartment|
+|grade | An index from 1 to 13, where 1-3 falls short of building construction and design, 7 has an average level of construction and design, and 11-13 have a high quality level of construction and design.|
+|sqft_above | The square footage of the interior housing space that is above ground level|
+|sqft_basement | The square footage of the interior housing space that is below ground level|
+|yr_built | The year the property was initially built|
+|yr_renovated | The year of the property’s last renovation|
+|zipcode | What zipcode area the property is in|
+|lat | Lattitude|
+|long | Longitude|
+|sqft_living15 | The square footage of interior housing living space for the nearest 15 neighbors|
+|sqft_lot15 | The square footage of the land lots of the nearest 15 neighbors|
+
+# 3. Business Assumptions.
 
 The assumptions about the business problem is as follows:
 
-- **CVDs are the number 1 cause of death globally**: more people die annually from CVDs than from any other cause.
-- An estimated **17.9 million** people died from CVDs in 2016, representing 31% of all global deaths. Of these deaths, 85% are due to heart attack and stroke.
-- Over three quarters of CVD deaths take place in **low- and middle-income countries**.
-- Out of the **17 million** premature deaths (under the age of 70) due to noncommunicable diseases in 2015, **82%** are in low- and middle-income countries, and 37% are caused by CVDs.
-- Most cardiovascular diseases can be **prevented by addressing behavioural risk factors** such as tobacco use, unhealthy diet and obesity, physical inactivity and harmful use of alcohol using population-wide strategies.
-- People with cardiovascular disease or who are at high cardiovascular risk (due to the presence of one or more risk factors such as hypertension, diabetes, hyperlipidaemia or already established disease) **need early detection and management** using counselling and medicines, as appropriate.
-
-PS 1: All the references are stated at the end of this README.
-
-PS 2: You can find useful information at **section 1** of my [notebook](#).
+- The following assumptions were considered for this project:
+- Values ​​equal to zero in **yr_renovated** are houses that have never been renovated.
+- The value equal to 33 in the **bathroom** column was considered an error and therefore it was excluded from the analysis
+- The column **price** means the price that the house was / will be purchased by the House Rocket company
+- Duplicate ID values ​​have been removed and only the most recent purchase is considered
+- The location and condition of the property were decisive characteristics in the purchase or not of the property
+- The season of the year was the decisive characteristic for the time when the property was sold
 
 
-# 3. Solution Strategy
+# 4. Solution Strategy
 
 My strategy to solve this challenge was:
+
+Understanding the business model
+Understanding the business problem
+Collecting the data
+Data Description
+Data Filtering
+Feature Engineering
+Exploratory Data Analysis
+Insights Conclusion
+Dashboard deploy on Heroku
+
+
+**Step 01. Data Extraction:** Exctract the data drom [Kaggle](https://www.kaggle.com/harlfoxem/housesalesprediction/discussion/207885).
 
 **Step 01. Data Description:** My goal is to use statistics metrics to identify data outside the scope of business.
 
