@@ -85,7 +85,7 @@ Dashboard deploy on [Heroku](https://insights-house-rocket.herokuapp.com/)
 
 **Step 07. Deploy the model:** Publish the model in a cloud environment so that other people can see the results obtained.
 
-# 4. Top Insights
+# 5. Top Insights
 
 | Hipótese                                                     | Resultado  | Tradução para negócio                                        |
 | ------------------------------------------------------------ | ---------- | ------------------------------------------------------------ |
@@ -101,7 +101,7 @@ Dashboard deploy on [Heroku](https://insights-house-rocket.herokuapp.com/)
 | **H10** - Properties in good condition and good view are, in average, 40% more expensive than properties in condition and average view | True      | Acquire properties with good conditions but an average view to renovate them in order to obtain a better view, thus profiting more from the sale                 |
 
 
-# 7. Business Results
+# 6. Business Results
 
 The following strategies for buying and selling properties were defined in order to answer the business questions:
 
@@ -126,11 +126,11 @@ Once the house has been purchased, what is the best time to sell it and at what 
 Following these strategies, the total estimated profit from the sale of properties is US$ 322179949.50
 
 
-# 8. Conclusions
+# 7. Conclusions
 
 The objective of this project was achieved; create a online dashboard to vizualize the principal insights, facilitating data visualization and business decisions, and answer the business questions, estimating the profit that can be made. 
 
 
-# 9. Next Steps to Improve
+# 8. Next Steps to Improve
 
 **1.** **Develop a regression model** hat can indicate if a property is expensive or cheap and if a renovation is done the % of profit that can be made.
