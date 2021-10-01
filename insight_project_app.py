@@ -12,7 +12,6 @@ c1, c2 = st.columns((1,5))
 
 st.write('')
 HR_format = '<p style="font-family:sans-serif;' \
-                'color:#FFFFFF;' \
                 'font-size: 300%;' \
                 'font-weight: bold;' \
                 'font-style: italic;' \
